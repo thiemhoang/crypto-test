@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crypto.scheduler.dao.CryptoPriceRepository">
+    <insert id="saveAll" parameterType="java.util.List">
+
+        INSERT INTO crypto_latest_price(symbol, bid_price, ask_price)
+        VALUES
+        <foreach item="item"  collection="entities" open="(" separator="),(" close=")">
+            #{item.symbol, jdbcType=VARCHAR}, #{item.bidPrice}, #{item.askPrice}
+        </foreach>
+        ON DUPLICATE KEY UPDATE  bid_price = VALUES(bid_price), ask_price = VALUES(ask_price);
+    </insert>
+</mapper>

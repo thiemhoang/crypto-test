@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crypto.api.crypto.service.dao.CryptoPriceRepository">
+
+    <resultMap id="CategoryResultMap" type="com.crypto.api.crypto.service.entity.CryptoPriceEntity">
+        <id column="symbol" property="symbol" jdbcType="INTEGER"/>
+        <result column="bid_price" property="bidPrice" jdbcType="DECIMAL"/>
+        <result column="ask_price" property="askPrice" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="getPrice" resultMap="">
+        SELECT
+            symbol,
+            bid_price,
+            ask_price
+        FROM crypto_latest_price
+        WHERE symbol={#symbol}
+    </select>
+</mapper>
