@@ -12,28 +12,25 @@
             symbol,
             balance
         FROM user_balance
-        WHERE user_id = {#userId}
+        WHERE user_id = #{userId}
     </select>
 
-    <select id="getBalance" resultMap="BalanceResultMap" parameterType="map">
+    <select id="getBalance" resultType="java.math.BigDecimal" parameterType="map">
         SELECT
-            symbol,
             balance
         FROM user_balance
-        WHERE user_id = {#userId} AND symbol={#symbol}
+        WHERE user_id = #{userId} AND symbol=#{symbol}
     </select>
 
     <update id="deductBalance" parameterType="map">
         UPDATE user_balance
-        SET balance = balance - {#amount}
-        FROM user_balance
-        WHERE user_id = {#userId} AND symbol={#symbol} AND (balance - #{amount} >= 0)
+        SET balance = balance - #{amount}
+        WHERE user_id = #{userId} AND symbol=#{symbol} AND (balance - #{amount} >= 0)
     </update>
 
     <update id="addAccountBalance" parameterType="map">
         UPDATE user_balance
-        SET balance = balance + {#amount}
-        FROM user_balance
-        WHERE user_id = {#userId} AND symbol={#symbol}
+        SET balance = balance + #{amount}
+        WHERE user_id = #{userId} AND symbol=#{symbol}
     </update>
 </mapper>

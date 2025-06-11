@@ -2,6 +2,7 @@ package com.crypto.api.crypto.service.dao;
 
 import com.crypto.api.crypto.service.entity.CryptoPriceEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,5 +11,5 @@ import java.util.List;
 @Repository
 public interface CryptoPriceRepository {
 
-    CryptoPriceEntity getPrice(String symbol);
+    CryptoPriceEntity getPrice(@Param("symbol") String symbol);
 }

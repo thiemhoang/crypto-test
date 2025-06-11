@@ -14,6 +14,6 @@
             bid_price,
             ask_price
         FROM crypto_latest_price
-        WHERE symbol={#symbol}
+        WHERE symbol=#{symbol}
     </select>
 </mapper>

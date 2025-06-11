@@ -1,4 +1,4 @@
-package org.hrs.controller;
+package com.crypto.api.crypto.service.controller;
 
 import com.crypto.api.crypto.service.constant.AppConstant;
 import com.crypto.api.crypto.service.service.UserService;

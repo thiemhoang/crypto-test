@@ -1,5 +1,6 @@
 package com.crypto.api.crypto.service.controller;
 
+import com.crypto.api.crypto.service.constant.TradingType;
 import com.crypto.api.crypto.service.model.request.TradingRequest;
 import com.crypto.api.crypto.service.model.response.ErrorResponse;
 import com.crypto.api.crypto.service.model.response.ListCryptoResponseModel;
@@ -27,11 +28,13 @@ public class TradingController {
     @PostMapping({"/v1/buy"})
     public ResponseEntity<ErrorResponse> buy(@RequestBody TradingRequest tradingRequest)  {
 
+        tradingRequest.setTradingType(TradingType.BUY);
         return ResponseEntity.ok(this.tradingService.buy(tradingRequest));
     }
 
     @PostMapping({"/v1/sell"})
     public ResponseEntity<ErrorResponse> sell(@RequestBody TradingRequest tradingRequest) {
+        tradingRequest.setTradingType(TradingType.SELL);
         return ResponseEntity.ok(this.tradingService.sell(tradingRequest));
     }
 

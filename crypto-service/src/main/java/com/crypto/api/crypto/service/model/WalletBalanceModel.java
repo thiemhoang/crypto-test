@@ -11,11 +11,11 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 public class WalletBalanceModel {
-    private String currencyCode;
+    private String symbol;
     private BigDecimal balance;
 
     public WalletBalanceModel(BalanceEntity entity) {
-        this.currencyCode = entity.getCurrencyCode();
+        this.symbol = entity.getSymbol();
         this.balance = entity.getBalance();
     }
 }

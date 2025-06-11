@@ -3,6 +3,7 @@ package com.crypto.api.crypto.service.dao;
 import com.crypto.api.crypto.service.entity.TransactionEntity;
 import com.crypto.api.crypto.service.model.request.TransactionFilterRequest;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface TransactionRepository {
-    List<TransactionEntity> search(TransactionFilterRequest request);
+    List<TransactionEntity> search(@Param("request") TransactionFilterRequest request);
 
-    void insert(TransactionEntity transactionEntity);
+    void insert(@Param("entity")TransactionEntity transactionEntity);
 }

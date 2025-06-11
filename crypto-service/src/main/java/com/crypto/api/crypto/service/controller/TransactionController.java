@@ -21,7 +21,7 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @GetMapping({"/v1/history"})
-    public ResponseEntity<ListTransactionHistoryResponseModel> searchTransaction(@RequestParam(required = false) String transactionType, @RequestParam(required = false) LocalDate transactionDate, @RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<ListTransactionHistoryResponseModel> searchTransaction(@RequestParam(required = false) String transactionType, @RequestParam(required = false) LocalDate transactionDate, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(defaultValue = "50", required = false) int size) {
         TransactionFilterRequest searchRequest = new TransactionFilterRequest(AppConstant.USER_ID, transactionType, transactionDate, page, size);
         return ResponseEntity.ok(this.transactionService.search(searchRequest));
     }

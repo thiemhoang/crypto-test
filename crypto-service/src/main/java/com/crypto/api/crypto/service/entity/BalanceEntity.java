@@ -1,11 +1,13 @@
 package com.crypto.api.crypto.service.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 public class BalanceEntity {
-    private String currencyCode;
+    private String symbol;
     private BigDecimal balance;
 }

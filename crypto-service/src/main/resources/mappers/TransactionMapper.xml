@@ -12,7 +12,7 @@
         <result column="transaction_type" property="transactionType" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="search" resultMap="CryptoPriceResultMap">
+    <select id="search" resultMap="TransactionResultMap">
         SELECT
             symbol,
             user_id,
@@ -24,16 +24,16 @@
         FROM trading_transaction
         WHERE user_id = #{request.userId}
         <if test="request.transactionType != null">
-            AND transaction_type = {#request.transactionType}
+            AND transaction_type = #{request.transactionType}
         </if>
 
         <if test="request.transactionDate != null">
-            AND transaction_date_time = {#request.transactionDate}
+            AND transaction_date_time = #{request.transactionDate}
         </if>
 
     </select>
     <insert id="insert">
         INSERT INTO trading_transaction(symbol, user_id, amount, price, transaction_date_time, transaction_type)
-        VALUES ({#entity.symbol}, {#entity.userId}, {#entity.amount}, {#entity.price}, {#entity.transactionDate}, {#entity.transactionType})
+        VALUES (#{entity.symbol}, #{entity.userId}, #{entity.amount}, #{entity.price}, #{entity.transactionDateTime}, #{entity.transactionType})
     </insert>
 </mapper>
