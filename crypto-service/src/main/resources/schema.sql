@@ -7,16 +7,17 @@ CREATE TABLE IF NOT EXISTS crypto_latest_price (
 
 CREATE TABLE IF NOT EXISTS user_info (
     id INT auto_increment NOT NULL PRIMARY KEY,
-    login_id VARCHAR(50)
+    login_id VARCHAR(50),
     last_update_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS user_balance (
-    user_id NOT NULL PRIMARY KEY,
-    currency_code VARCHAR(10) PRIMARY KEY,
+    user_id INT NOT NULL,
+    symbol VARCHAR(10),
     balance DECIMAL(25,8) NOT NULL DEFAULT 0,
     last_update_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    foreign key (user_id) references user_info(id)
+    foreign key (user_id) references user_info(id),
+    PRIMARY KEY(user_id, symbol)
 );
 
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crypto.api.crypto.service.dao.TransactionRepository">
+
+    <resultMap id="TransactionResultMap" type="com.crypto.api.crypto.service.entity.TransactionEntity">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="symbol" property="symbol" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="transaction_date_time" property="transactionDateTime" jdbcType="TIMESTAMP"/>
+        <result column="transaction_type" property="transactionType" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="search" resultMap="CryptoPriceResultMap">
+        SELECT
+            symbol,
+            user_id,
+            amount,
+            price,
+            transaction_date_time,
+            transaction_type
+
+        FROM trading_transaction
+        WHERE user_id = #{request.userId}
+        <if test="request.transactionType != null">
+            AND transaction_type = {#request.transactionType}
+        </if>
+
+        <if test="request.transactionDate != null">
+            AND transaction_date_time = {#request.transactionDate}
+        </if>
+
+    </select>
+    <insert id="insert">
+        INSERT INTO trading_transaction(symbol, user_id, amount, price, transaction_date_time, transaction_type)
+        VALUES ({#entity.symbol}, {#entity.userId}, {#entity.amount}, {#entity.price}, {#entity.transactionDate}, {#entity.transactionType})
+    </insert>
+</mapper>
